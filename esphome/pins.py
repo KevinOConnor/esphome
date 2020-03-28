@@ -357,9 +357,11 @@ def output_pin(value):
     raise NotImplementedError
 
 
-def analog_pin(value):
+def analog_pin(value, only_ADC1=True):
     value = validate_gpio_pin(value)
     if CORE.is_esp32:
+        if not only_ADC1 and value in [0, 2, 4, 12, 13, 14, 15, 25, 26, 27]:
+            return value # ADC2
         if 32 <= value <= 39:  # ADC1
             return value
         raise cv.Invalid("ESP32: Only pins 32 though 39 support ADC.")
