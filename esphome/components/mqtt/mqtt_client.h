@@ -203,6 +203,7 @@ class MQTTClientComponent : public Component {
   void register_mqtt_component(MQTTComponent *component);
 
   bool is_connected();
+  bool sent_birth_message() {return this->sent_birth_message_;}
 
   void on_shutdown() override;
 
